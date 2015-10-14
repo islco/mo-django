@@ -1,0 +1,22 @@
+{
+  "name": "{{ cookiecutter.repo_name }}",
+  "env":{
+    "DJANGO_SETTINGS_MODULE":{
+      "value": "{{ cookiecutter.package_name }}.settings"
+    },
+    "SECRET_KEY": {
+      "generator": "secret"
+    }
+  },
+  "addons":[
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-python"
+    }
+  ]
+}

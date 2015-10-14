@@ -1,0 +1,1 @@
+domain: {{ cookiecutter.domain_name }}

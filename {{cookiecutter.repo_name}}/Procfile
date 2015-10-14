@@ -1,0 +1,4 @@
+web: waitress-serve --port=$PORT {{ cookiecutter.package_name }}.wsgi:application
+{% if cookiecutter.use_celery == "y" -%}
+celery_worker: celeryd
+{%- endif %}
