@@ -1,0 +1,10 @@
+{
+  "css": {
+    "innit/static/css/vendor.css": [
+    ]
+  },
+  "js": {
+    "innit/static/js/vendor.js": [
+    ]
+  }
+}
