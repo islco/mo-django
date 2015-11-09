@@ -1,1 +1,4 @@
 domain: {{ cookiecutter.domain_name }}
+heroku:
+  staging: {{ cookiecutter.repo_name }}-staging
+  production: {{ cookiecutter.repo_name }}-prod
