@@ -50,6 +50,7 @@ INSTALLED_APPS += ('djcelery',)
 {%- endif %}
 
 MIDDLEWARE_CLASSES = (
+    'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -95,3 +96,8 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # Media
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
+
+# SSL
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SSLIFY_DISABLE = config('SSLIFY_DISABLE', default=False, cast=bool)
