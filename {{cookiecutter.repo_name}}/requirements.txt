@@ -1,34 +1,28 @@
-
-Django==1.8.4
-waitress==0.8.10
-whitenoise==2.0.4
+Django>=1.9,<1.10
+waitress>=0.8,<0.9
+whitenoise>=2.0,<2.1
 
 dj-database-url==0.3.0
-django-debug-toolbar==1.3.2
+django-debug-toolbar>=1.4,<1.5
 django-sslify==0.2.7
 
-python-decouple==2.3
-pytz==2015.4
-sqlparse==0.1.16
+python-decouple==3.0
+pytz==2015.7
+sqlparse>=0.1,<0.2
 
 {% if cookiecutter.use_postgres == 'y' -%}
-psycopg2==2.6.1
+psycopg2>=2.6,<2.7
 {%- endif %}
 
 {% if cookiecutter.use_redis == 'y' -%}
-django-redis==4.2.0
-redis>=2.10.0
+django-redis==4.3.0
+redis>=2.10,<2.11
 {%- endif %}
 
 {% if cookiecutter.use_celery == "y" -%}
-celery==3.1.16
+celery>=3.1,<3.2
 {%- endif %}
 
 {% if cookiecutter.use_sentry == "y" -%}
-raven
+raven>=5.10,<5.11
 {%- endif %}
-
-# maybe????
-# django-environ==0.3.0
-# django-secure==1.0.1
-# django-model-utils==2.3.1

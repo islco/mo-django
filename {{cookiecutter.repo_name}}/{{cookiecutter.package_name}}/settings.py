@@ -25,7 +25,6 @@ SECRET_KEY = config('SECRET_KEY', default='fortheloveofgodthisisnotsecure')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
-TEMPLATE_DEBUG = config('TEMPLATE_DEBUG', default=DEBUG, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='',
                        cast=lambda v: [s.strip() for s in v.split(',')])
@@ -61,6 +60,23 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = '{{ cookiecutter.package_name }}.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+            'debug': config('TEMPLATE_DEBUG', default=DEBUG, cast=bool),
+        },
+    },
+]
 
 WSGI_APPLICATION = '{{ cookiecutter.package_name }}.wsgi.application'
 
