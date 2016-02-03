@@ -34,7 +34,7 @@ Edit *.env* and set the values you need to run the project locally. Next, instal
 
 ```
 mkvirtualenv3 {{ cookiecutter.package_name }}
-pip install -r requirements/dev.txt
+pip install -r requirements.txt
 ```
 
 Initialize Django...

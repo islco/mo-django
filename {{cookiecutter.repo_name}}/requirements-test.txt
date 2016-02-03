@@ -1,4 +1,4 @@
--r base.txt
+-r requirements.txt
 
 coverage==4.0b3
 flake8==2.4.1

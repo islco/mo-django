@@ -1,5 +1,0 @@
--r base.txt
-
-{% if cookiecutter.use_sentry == "y" -%}
-raven
-{%- endif %}
