@@ -23,7 +23,7 @@ A [cookiecutter](https://github.com/audreyr/cookiecutter) template for ISL Djang
 
 Optional packages include:
 
-* [celery](http://www.celeryproject.org)
+* [rq](http://python-rq.org)
 * [django-redis](https://github.com/niwinz/django-redis)
 * [psycopg2](http://initd.org/psycopg/)
 

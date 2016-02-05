@@ -44,8 +44,8 @@ INSTALLED_APPS = (
 if DEBUG:
     INSTALLED_APPS += ('debug_toolbar',)
 
-{% if cookiecutter.use_celery == "y" -%}
-INSTALLED_APPS += ('djcelery',)
+{% if cookiecutter.use_rq == "y" -%}
+INSTALLED_APPS += ('django_rq',)
 {%- endif %}
 
 MIDDLEWARE_CLASSES = (
@@ -117,3 +117,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SSLIFY_DISABLE = config('SSLIFY_DISABLE', default=False, cast=bool)
+
+{% if cookiecutter.use_rq == "y" -%}
+# rq
+
+RQ_QUEUES = {
+    'default': {
+        'URL': config('REDIS_URL', default='redis://localhost:6379/0'),
+    },
+    'high': {
+        'URL': config('REDIS_URL', default='redis://localhost:6379/0'),
+    },
+    'low': {
+        'URL': config('REDIS_URL', default='redis://localhost:6379/0'),
+    },
+}
+{%- endif %}

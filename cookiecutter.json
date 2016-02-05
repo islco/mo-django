@@ -10,6 +10,6 @@
     "timezone": "UTC",
     "use_postgres": "y",
     "use_sentry": "y",
-    "use_celery": "n",
-    "use_redis": "{{ cookiecutter.use_celery }}"
+    "use_rq": "n",
+    "use_redis": "{{ cookiecutter.use_rq }}"
 }
