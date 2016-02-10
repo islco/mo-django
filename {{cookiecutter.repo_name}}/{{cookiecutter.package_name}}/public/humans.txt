@@ -1,0 +1,12 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    ISL -- Digital Creative Agency -- @istrategylabs
+
+# THANKS
+
+# TECHNOLOGY COLOPHON
+
+    Python, Django
