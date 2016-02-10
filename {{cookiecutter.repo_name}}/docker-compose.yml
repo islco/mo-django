@@ -1,0 +1,30 @@
+{% if cookiecutter.use_postgres == "y" -%}
+db:
+  image: postgres
+  ports:
+    - "5432:5432"
+{%- endif %}
+{% if cookiecutter.use_redis == "y" -%}
+redis:
+  image: redis
+  ports:
+    - "6379:6379"
+{%- endif %}
+web:
+  restart: always
+  build: .
+  command: python manage.py runserver 0.0.0.0:8000
+  volumes:
+    - .:/project
+  ports:
+    - "8000:8000"
+    - "9000:9000"
+  links:
+    {% if cookiecutter.use_postgres == "y" -%}- db{%- endif %}
+    {% if cookiecutter.use_redis == "y" -%}- redis{%- endif %}
+  environment:
+    - SECRET_KEY=lets-keep-this-just-between-you-and-me-docker
+    - DEBUG=True
+    - SSLIFY_DISABLE=True
+    {% if cookiecutter.use_postgres == "y" -%}- DATABASE_URL=postgres://postgres@db:5432/postgres{%- endif %}
+    {% if cookiecutter.use_redis == "y" -%}- REDIS_URL=redis://redis:6379/0{%- endif %}
