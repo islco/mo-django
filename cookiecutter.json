@@ -6,8 +6,6 @@
     "email": "dev@isl.co",
     "description": "A short description of the project.",
     "domain_name": "example.isl.codes",
-    "version": "0.1.0",
-    "timezone": "UTC",
     "use_postgres": "y",
     "use_sentry": "y",
     "use_celery": "n",
