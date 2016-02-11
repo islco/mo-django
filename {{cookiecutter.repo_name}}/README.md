@@ -11,7 +11,7 @@ You are almost ready to run this barebones application, so let's make it happen.
 * Copy *env.example* to *.env*
 * Edit *.env* to set a valid DATABASE_URL
 * Run `source .env` to load the environment variables
-* Run `mkvirtualenv {{ cookiecutter.repo_name }}` to create the Python virtual environment
+* Run `mkvirtualenv --python=$(which python3) {{ cookiecutter.repo_name }}` to create the Python virtual environment
 * Run `pip install -r requirements.txt` to install the default project dependencies
 * Run `python manage.py migrate` to create the database and default tables
 * If you want to setup a Django admin user, run `python manage.py syncdb`
@@ -33,7 +33,7 @@ cp env.example .env
 Edit *.env* and set the values you need to run the project locally. Next, install Python 3 requirements...
 
 ```
-mkvirtualenv3 {{ cookiecutter.package_name }}
+mkvirtualenv --python=$(which python3) {{ cookiecutter.package_name }}
 pip install -r requirements.txt
 ```
 
