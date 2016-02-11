@@ -4,7 +4,7 @@
     "package_name": "{{ cookiecutter.repo_name|lower|replace('-', '') }}",
     "author_name": "ISL",
     "email": "dev@isl.co",
-    "description": "A short description of the project.",
+    "description": "",
     "domain_name": "example.isl.codes",
     "version": "0.1.0",
     "timezone": "UTC",
