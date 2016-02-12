@@ -15,12 +15,13 @@ psycopg2>=2.6,<2.7
 {%- endif %}
 
 {% if cookiecutter.use_redis == 'y' -%}
-django-redis==4.3.0
 redis>=2.10,<2.11
+django-redis>=4.3,<4.4
 {%- endif %}
 
-{% if cookiecutter.use_celery == "y" -%}
-celery>=3.1,<3.2
+{% if cookiecutter.use_rq == "y" -%}
+rq>=0.5,<0.6
+django-rq>=0.9,<0.10
 {%- endif %}
 
 {% if cookiecutter.use_sentry == "y" -%}
