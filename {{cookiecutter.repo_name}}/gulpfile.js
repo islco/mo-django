@@ -12,8 +12,6 @@ const sourcemaps     = require('gulp-sourcemaps');
 const source         = require('vinyl-source-stream');
 const buffer         = require('vinyl-buffer');
 const browserify     = require('browserify');
-const rev            = require('gulp-rev');
-const revReplace     = require('gulp-rev-replace');
 const uglify         = require('gulp-uglify');
 const cssnano        = require('gulp-cssnano');
 const gulpif         = require('gulp-if');
@@ -92,21 +90,6 @@ gulp.task('watch', ['sass', 'extras', 'watchify'], () => {
   gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}', ['extras']);
 });
 
-gulp.task('rev', ['build', 'banner'], () => {
-  return gulp.src(['./public/**/*', '!**/*.html'], { base: './public' })
-    .pipe(rev())
-    .pipe(gulp.dest('./public/'))
-    .pipe(rev.manifest())
-    .pipe(gulp.dest('./public/'));
-});
-
-gulp.task('rev:replace', ['rev'], () => {
-  const manifest = gulp.src('./public/rev-manifest.json');
-  return gulp.src('./public/**/*')
-    .pipe(revReplace({ manifest: manifest }))
-    .pipe(gulp.dest('./public/'));
-});
-
 gulp.task('banner', ['browserify'], () => {
   return gulp.src(['banner.txt', './public/js/bundle.js'])
     .pipe(concat('bundle.js'))
@@ -114,7 +97,7 @@ gulp.task('banner', ['browserify'], () => {
 });
 
   return gulp.src(['./public/**/*'], { base: './public/' })
-gulp.task('minify', ['rev:replace'], () => {
+gulp.task('minify', () => {
     // Only target the versioned files with the hash
     // Those files have a - and a 10 character string
     .pipe(gulpif(/-\w{10}\.js$/, uglify()))
@@ -137,7 +120,7 @@ gulp.task('build', (done) => {
 gulp.task('build:production', (done) => {
   runSequence(
     'build',
-    ['banner', 'rev:replace', 'minify'],
+    ['banner', 'minify'],
     done
   );
 });
