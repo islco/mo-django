@@ -17,7 +17,6 @@ const revReplace     = require('gulp-rev-replace');
 const uglify         = require('gulp-uglify');
 const cssnano        = require('gulp-cssnano');
 const gulpif         = require('gulp-if');
-const critical       = require('critical').stream;
 const runSequence    = require('run-sequence');
 
 
@@ -114,22 +113,13 @@ gulp.task('banner', ['browserify'], () => {
     .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('minify', ['rev:replace', 'critical'], () => {
   return gulp.src(['./public/**/*'], { base: './public/' })
+gulp.task('minify', ['rev:replace'], () => {
     // Only target the versioned files with the hash
     // Those files have a - and a 10 character string
     .pipe(gulpif(/-\w{10}\.js$/, uglify()))
     .pipe(gulpif(/-\w{10}\.css$/, cssnano()))
     .pipe(gulp.dest('./public/'));
-});
-
-gulp.task('critical', ['rev:replace'], function() {
-  return gulp.src('public/**/*.html')
-  .pipe(critical({
-    base: 'public/',
-    inline: true
-  }))
-  .pipe(gulp.dest('public/'));
 });
 
 gulp.task('clean', () => {
@@ -147,7 +137,7 @@ gulp.task('build', (done) => {
 gulp.task('build:production', (done) => {
   runSequence(
     'build',
-    ['banner', 'rev:replace', 'minify', 'critical'],
+    ['banner', 'rev:replace', 'minify'],
     done
   );
 });
