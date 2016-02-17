@@ -20,7 +20,6 @@
     "gulp": "3.9.0",
     "gulp-concat": "2.6.0",
     "gulp-cssnano": "2.1.0",
-    "gulp-htmlmin": "1.2.0",
     "gulp-if": "2.0.0",
     "gulp-postcss": "6.0.1",
     "gulp-rev": "6.0.1",

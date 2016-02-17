@@ -16,7 +16,6 @@ const rev            = require('gulp-rev');
 const revReplace     = require('gulp-rev-replace');
 const uglify         = require('gulp-uglify');
 const cssnano        = require('gulp-cssnano');
-const htmlmin        = require('gulp-htmlmin');
 const gulpif         = require('gulp-if');
 const critical       = require('critical').stream;
 const runSequence    = require('run-sequence');
@@ -121,13 +120,6 @@ gulp.task('minify', ['rev:replace', 'critical'], () => {
     // Those files have a - and a 10 character string
     .pipe(gulpif(/-\w{10}\.js$/, uglify()))
     .pipe(gulpif(/-\w{10}\.css$/, cssnano()))
-    .pipe(gulpif('*.html', htmlmin({
-      collapseWhitespace: true,
-      removeComments: true,
-      removeRedundantAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true
-    })))
     .pipe(gulp.dest('./public/'));
 });
 
