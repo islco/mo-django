@@ -22,7 +22,7 @@ function bundle(options) {
   options = options || {};
   const bundlerOpts = { entry: true, debug: true };
   let bundler = browserify(
-    './src/js/{{ cookiecutter.repo_name }}.js', bundlerOpts
+    './{{ cookiecutter.package_name }}/static_src/js/{{ cookiecutter.repo_name }}.js', bundlerOpts
     )
     .transform('babelify', { presets: ['es2015'] });
 
@@ -36,7 +36,7 @@ function bundle(options) {
       .pipe(buffer())
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest('./public/js/'));
+      .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/js/'));
   }
 
   if (options.watch) {
@@ -60,7 +60,7 @@ gulp.task('watchify', () => {
 });
 
 gulp.task('sass', () => {
-  return gulp.src('./src/scss/**/*.scss')
+  return gulp.src('./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass(
       {% if cookiecutter.use_foundation_sites == 'y' -%}
@@ -72,41 +72,42 @@ gulp.task('sass', () => {
     .on('error', sass.logError))
     .pipe(postcss([autoprefixer]))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./public/css/'));
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/css/'));
 });
 
 gulp.task('extras', () => {
-  return gulp.src('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}')
-    .pipe(gulp.dest('./public/'));
+  return gulp.src('./{{ cookiecutter.package_name }}/static_src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}')
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/'));
 });
 
 gulp.task('watch', ['sass', 'extras', 'watchify'], () => {
   browserSync.init({
     server: 'public',
-    files: './public/**/*'
+    files: './{{ cookiecutter.package_name }}/static/**/*'
   });
 
-  gulp.watch('./src/scss/**/*.scss', ['sass']);
-  gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}', ['extras']);
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss', ['sass']);
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}', ['extras']);
 });
 
 gulp.task('banner', ['browserify'], () => {
-  return gulp.src(['banner.txt', './public/js/bundle.js'])
+  return gulp.src(['./public/banner.txt', './{{ cookiecutter.package_name }}/static/js/bundle.js'])
     .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./public/js/'));
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/js/'));
 });
 
-  return gulp.src(['./public/**/*'], { base: './public/' })
 gulp.task('minify', () => {
+  return gulp.src(['./{{ cookiecutter.package_name }}/static/**/*'],
+                  { base: './{{ cookiecutter.package_name }}/static/' })
     // Only target the versioned files with the hash
     // Those files have a - and a 10 character string
     .pipe(gulpif(/-\w{10}\.js$/, uglify()))
     .pipe(gulpif(/-\w{10}\.css$/, cssnano()))
-    .pipe(gulp.dest('./public/'));
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/'));
 });
 
 gulp.task('clean', () => {
-  return del('./public/');
+  return del('./{{ cookiecutter.package_name }}/static/');
 });
 
 gulp.task('build', (done) => {
