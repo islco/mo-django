@@ -9,7 +9,6 @@ const autoprefixer   = require('autoprefixer');
 const postcss        = require('gulp-postcss');
 const sass           = require('gulp-sass');
 const sourcemaps     = require('gulp-sourcemaps');
-const nunjucksRender = require('gulp-nunjucks-render');
 const source         = require('vinyl-source-stream');
 const buffer         = require('vinyl-buffer');
 const browserify     = require('browserify');
@@ -80,26 +79,18 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('./public/css/'));
 });
 
-gulp.task('nunjucks', () => {
-  nunjucksRender.nunjucks.configure(['./src/templates/'], { watch: false });
-  return gulp.src(['./src/templates/**/*.html', './src/js/**/*.html', '!**/_*'])
-    .pipe(nunjucksRender())
-    .pipe(gulp.dest('./public/'));
-});
-
 gulp.task('extras', () => {
   return gulp.src('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}')
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('watch', ['nunjucks', 'sass', 'extras', 'watchify'], () => {
+gulp.task('watch', ['sass', 'extras', 'watchify'], () => {
   browserSync.init({
     server: 'public',
     files: './public/**/*'
   });
 
   gulp.watch('./src/scss/**/*.scss', ['sass']);
-  gulp.watch('./src/**/*.html', ['nunjucks']);
   gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}', ['extras']);
 });
 
@@ -156,7 +147,7 @@ gulp.task('clean', () => {
 gulp.task('build', (done) => {
   runSequence(
     'clean',
-    ['browserify', 'nunjucks', 'sass', 'extras'],
+    ['browserify', 'sass', 'extras'],
     done
   );
 });
