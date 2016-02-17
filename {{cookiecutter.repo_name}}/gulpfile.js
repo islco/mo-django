@@ -82,10 +82,8 @@ gulp.task('extras', () => {
 
 gulp.task('watch', ['sass', 'extras', 'watchify'], () => {
   browserSync.init({
-    server: 'public',
-    files: './{{ cookiecutter.package_name }}/static/**/*'
+    proxy: '127.0.0.1:8000'
   });
-
   gulp.watch('./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss', ['sass']);
   gulp.watch('./{{ cookiecutter.package_name }}/static_src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}', ['extras']);
 });
