@@ -16,6 +16,7 @@ const uglify         = require('gulp-uglify');
 const cssnano        = require('gulp-cssnano');
 const gulpif         = require('gulp-if');
 const runSequence    = require('run-sequence');
+const path           = require('path');
 
 
 function bundle(options) {
