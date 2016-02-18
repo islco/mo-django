@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "{{ cookiecutter.description }}",
   "scripts": {
+    "postinstall": "gulp build:production",
     "build": "gulp build:production",
     "start": "gulp start"
   },
