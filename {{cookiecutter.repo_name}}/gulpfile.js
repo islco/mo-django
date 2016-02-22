@@ -100,8 +100,8 @@ gulp.task('minify', () => {
                   { base: './{{ cookiecutter.package_name }}/static/' })
     // Only target the versioned files with the hash
     // Those files have a - and a 10 character string
-    .pipe(gulpif(/-\w{10}\.js$/, uglify()))
-    .pipe(gulpif(/-\w{10}\.css$/, cssnano()))
+    .pipe(gulpif(/\.js$/, uglify()))
+    .pipe(gulpif(/\.css$/, cssnano()))
     .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/'));
 });
 
