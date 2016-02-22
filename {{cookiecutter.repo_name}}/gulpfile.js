@@ -1,154 +1,136 @@
-/* jshint node: true, browser: false, jquery: false */
-
 'use strict';
 
-var gulp    = require('gulp'),
-$           = require('gulp-load-plugins')({ lazy: false }),  // jshint ignore:line
-minimist    = require('minimist'),
-fs          = require('fs'),
-path        = require('path'),
-browserSync = require('browser-sync'),
-es          = require('event-stream'),
-lazypipe    = require('lazypipe');
-
-var knownOptions = {
-  string: 'env',
-  default: { env: process.env.NODE_ENV || 'local' }
-};
-var options = minimist(process.argv.slice(2), knownOptions);
-
-/**
- * project-wide variables
- */
-// __dirname is absolute path to project root
-var config         = require(path.join(__dirname, 'gulp-config.js')),
-    vendorFiles    = require(path.join(__dirname, 'gulp-assets.json'));
-
-var projectNameDashed = (function() {
-  var shell = require('shelljs');
-  var projectName = shell.exec('basename `git config --get remote.origin.url` .git',
-                               { silent: true, async: false }).output;
-  projectName = projectName.replace(/[\n\r]/g, '');
-  return projectName.replace(/[._]/g, '-');
-})();
+const gulp           = require('gulp');
+const gutil          = require('gulp-util');
+const del            = require('del');
+const concat         = require('gulp-concat');
+const browserSync    = require('browser-sync').create();
+const autoprefixer   = require('autoprefixer');
+const postcss        = require('gulp-postcss');
+const sass           = require('gulp-sass');
+const sourcemaps     = require('gulp-sourcemaps');
+const source         = require('vinyl-source-stream');
+const buffer         = require('vinyl-buffer');
+const browserify     = require('browserify');
+const uglify         = require('gulp-uglify');
+const cssnano        = require('gulp-cssnano');
+const gulpif         = require('gulp-if');
+const runSequence    = require('run-sequence');
+const path           = require('path');
 
 
-/**
- * Creates an array of gulp streams for concatenating an array of files
- * @param {object} files - Key is dest filename, val is array of files to be concatenated
- * @param {string} dist - Destination path
- */
-function vendorMap(files, dist) {
-  return Object.keys(files).map(function(distFile) {
-    var srcFiles = files[distFile].map(function(file) {
-      return config.src + file;
-    });
-    return gulp.src(srcFiles)
-    .pipe( $.concat(path.basename(distFile)) )
-    .pipe( gulp.dest(dist + path.dirname(distFile)) );
-  });
-}
+function bundle(options) {
+  options = options || {};
+  const bundlerOpts = { entry: true, debug: true };
+  let bundler = browserify(
+    './{{ cookiecutter.package_name }}/static_src/js/{{ cookiecutter.repo_name }}.js', bundlerOpts
+    )
+    .transform('babelify', { presets: ['es2015'] });
 
-
-gulp.task('fonts', function() {
-  var vendorFonts = gulp.src( require('main-bower-files')({ paths: config.bower }), { read: false } )
-  .pipe( $.if(config.fonts.glob, gulp.dest(config.fonts.dist)) );
-
-  var appFonts = gulp.src( [config.fonts.src + config.fonts.glob] )
-  .pipe( $.if(config.fonts.glob, gulp.dest(config.fonts.dist)) );
-
-  return es.merge.apply(null, [vendorFonts, appFonts]);
-});
-
-
-gulp.task('images', function() {
-  return gulp.src( [config.img.src + config.img.glob, '!**/_*', '!**/_*/*'] )
-  .pipe( $.plumber({ errorHandler: $.notify.onError('Error: <%= error.message %>') }))
-  .pipe( $.imagemin(config.imagemin) )
-  .pipe( gulp.dest(config.img.dist) );
-});
-
-
-gulp.task('css', function () {
-  var sassChannel = lazypipe()
-  .pipe( $.sourcemaps.init )
-  .pipe( $.sass, config.nodeSass )
-  .pipe( $.autoprefixer, config.autoprefixer )
-  .pipe( $.sourcemaps.write )
-  .pipe( gulp.dest, config.css.dist )
-  .pipe( browserSync.reload, { stream: true } );
-
-  var appStream = gulp.src( config.sass.src + config.sass.glob )
-  .on('error', $.notify.onError('Error: <%= error.message %>'))
-  .pipe(sassChannel());
-
-  var vendorStream = vendorMap(vendorFiles.css, config.dist);
-
-  return es.merge.apply(null, vendorStream.concat(appStream));
-});
-
-
-gulp.task('js', function() {
-  var browserify = require('browserify');
-  var source = require('vinyl-source-stream');
-  var bundles = config.browserify.bundles;
-  var appStream = [];
-
-  bundles.forEach(function(bundleConfig) {
-    var b = browserify(bundleConfig);
-    appStream.push(
-      b.bundle()
+  function rebundle() {
+    return bundler.bundle()
       .on('error', function(err) {
-        $.util.log($.util.colors.red(err.message));
+        gutil.log(gutil.colors.red(err.message));
         this.emit('end');
       })
-      .pipe( source(bundleConfig.outputName) )
-      .pipe( gulp.dest(bundleConfig.dest) )
-      .pipe( browserSync.reload({stream: true}) )
-    );
+      .pipe(source('bundle.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/js/'));
+  }
+
+  if (options.watch) {
+    const watchify = require('watchify');
+    bundler = watchify(bundler);
+    bundler.on('update', () => {
+      gutil.log('-> bundling...');
+      rebundle();
+    });
+  }
+
+  return rebundle();
+}
+
+gulp.task('browserify', () => {
+  return bundle();
+});
+
+gulp.task('watchify', () => {
+  return bundle({ watch: true });
+});
+
+gulp.task('sass', () => {
+  return gulp.src('./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass(
+      {% if cookiecutter.use_foundation_sites == 'y' -%}
+      {
+        includePaths: [path.join(path.dirname(require.resolve('foundation-sites')), '../scss')]
+      }
+      {%- endif %}
+    )
+    .on('error', sass.logError))
+    .pipe(postcss([autoprefixer]))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/css/'));
+});
+
+gulp.task('extras', () => {
+  return gulp.src('./{{ cookiecutter.package_name }}/static_src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}')
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/'));
+});
+
+gulp.task('watch', ['sass', 'extras', 'watchify'], () => {
+  browserSync.init({
+    proxy: '127.0.0.1:8000'
   });
-
-  var vendorStream = vendorMap(vendorFiles.js, config.dist);
-
-  // flatten arrays of streams and single streams into one array of streams
-  var jsStream = Array.prototype.concat.apply([], [appStream, vendorStream]);
-  return es.merge.apply(null, jsStream);
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss', ['sass']);
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff, woff2}', ['extras']);
 });
 
-
-gulp.task('modernizr', function() {
-  return gulp.src( [config.js.src + config.js.glob, config.sass.src + config.sass.glob] )
-  .pipe( $.modernizr( config.modernizr ) )
-  .pipe( gulp.dest(config.js.src + 'vendor/') );
+gulp.task('banner', ['browserify'], () => {
+  return gulp.src(['./public/banner.txt', './{{ cookiecutter.package_name }}/static/js/bundle.js'])
+    .pipe(concat('bundle.js'))
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/js/'));
 });
 
-
-gulp.task('browser-sync', function() {
-  browserSync({
-    port: config.browserSync.port,
-    proxy: "localhost:8000"
-  });
+gulp.task('minify', () => {
+  return gulp.src(['./{{ cookiecutter.package_name }}/static/**/*'],
+                  { base: './{{ cookiecutter.package_name }}/static/' })
+    // Only target the versioned files with the hash
+    // Those files have a - and a 10 character string
+    .pipe(gulpif(/\.js$/, uglify()))
+    .pipe(gulpif(/\.css$/, cssnano()))
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/'));
 });
 
-
-gulp.task('watch', ['browser-sync'], function() {
-  gulp.watch(config.js.src + config.js.glob, ['js', browserSync.reload]);
-  gulp.watch(config.sass.src + config.sass.glob, ['css']); // stream reloads in css task
-  gulp.watch(config.img.src + config.img.glob, ['images', browserSync.reload]);
-  gulp.watch(config.fonts.src + config.fonts.glob, ['fonts', browserSync.reload]);
-  gulp.watch(config.src + 'gulp-assets.json', ['js', 'css', browserSync.reload]);
+gulp.task('clean', () => {
+  return del('./{{ cookiecutter.package_name }}/static/');
 });
 
-
-gulp.task('build', function() {
-  require('run-sequence')(
-    ['css', 'js', 'fonts', 'images']
+gulp.task('build', (done) => {
+  runSequence(
+    'clean',
+    ['browserify', 'sass', 'extras'],
+    done
   );
 });
 
+gulp.task('build:production', (done) => {
+  runSequence(
+    'build',
+    ['banner', 'minify'],
+    done
+  );
+});
 
-gulp.task('help', ['list']);
-gulp.task('list', $.taskListing);
-
+gulp.task('start', (done) => {
+  runSequence(
+    'build',
+    'watch',
+    done
+  );
+});
 
 gulp.task('default', ['build']);
