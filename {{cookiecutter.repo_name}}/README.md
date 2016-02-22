@@ -145,7 +145,7 @@ heroku addons:create heroku-postgresql:hobby-basic
 ### Redis
 
 ```
-heroku addons:create heroku-redis:hobby-dev
+heroku addons:create heroku-redis:hobby-dev --maxmemory volatile-lru
 ```
 {%- endif %}
 
