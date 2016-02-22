@@ -64,34 +64,42 @@ gulp build
 
 ## Running the Project
 
-Load the virtualenv and environment variables:
+First load the virtualenv:
 
 ```
 workon {{ cookiecutter.repo_name }}
-source .env
 ```
 
-### Django Development Server
-
-Use the Django development server when working on the project:
+Then use [foreman](http://ddollar.github.io/foreman/) (or [forego](https://github.com/ddollar/forego)) to run the development processes:
 
 ```
-python manage.py runserver
+foreman start -f Procfile.dev
+```
+
+*Procfile.dev* defines the following processes:
+
+* web: the Django development server
+* static: the gulp watch process
+{% if cookiecutter.use_rq == 'y' -%}* rqworker: the RQ worker process (high, low, and default){%- endif %}
+
+`foreman start -f Procfile.dev` will start all of the processes at once. If you
+want to run a specific process, you can specify it directly:
+
+```
+foreman start -f Procfile.dev web
 ```
 
 {% if cookiecutter.use_rq == 'y' -%}
-#### RQ Worker Processes
-
-The Django dev server only runs the web application, not any additional worker processes. The RQ workers can be run separately from the dev server using the *rqworker* management command:
+or
 
 ```
-python manage.py rqworker high default low
-``` 
+foreman start -f Procfile.dev rqworker
+```
 {%- endif %}
 
 ### Procfile
 
-When deployed to production or staging, the application and any other processes will be run as defined in the Procfile. You can run this file locally using [foreman](http://theforeman.org) to launch the application the same way it will be run in production:
+When deployed to production or staging, the application and any other processes will be run as defined in the Procfile. You can run this file locally using [foreman](http://ddollar.github.io/foreman/) to launch the application the same way it will be run in production:
 
 ```
 foreman start
@@ -137,7 +145,7 @@ heroku addons:create heroku-postgresql:hobby-basic
 ### Redis
 
 ```
-heroku addons:create heroku-redis:hobby-dev
+heroku addons:create heroku-redis:hobby-dev --maxmemory volatile-lru
 ```
 {%- endif %}
 
