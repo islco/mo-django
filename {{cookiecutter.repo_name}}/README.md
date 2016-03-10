@@ -112,7 +112,13 @@ You are **highly encouraged** to do this before finishing features to make sure 
 
 ### Set Environment Variables
 
-**LIST YOUR ENVIRONMENT VARIABLES, THEIR DESCRIPTIONS, AND SANE DEFAULTS HERE**
+| Environment Variable | Description |
+|----------------------|-------------|
+| DEBUG | `True` in development, `False` otherwise |
+| SECRET_KEY | Set this to a different value in every environment |
+| ALLOWED_HOSTS | comma separated list of allowed domains |
+| DATABASE_URL | database config URI |
+| SSLIFY_DISABLE | disables SSL check when `True` |
 
 
 ## Deploying on Heroku

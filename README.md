@@ -5,10 +5,12 @@ A [cookiecutter](https://github.com/audreyr/cookiecutter) template for ISL Djang
 ## Features
 
 * [editorconfig](http://editorconfig.org/)
+* [ES2015](http://www.ecma-international.org/ecma-262/6.0/index.html) support via [Babel](https://babeljs.io)
 * [Gulp](http://gulpjs.com/)
-* [SASS](https://github.com/dlmanning/gulp-sass) (w/[Autoprefixer](https://autoprefixer.github.io/))
-* [Browserify](http://browserify.org/) (w/[Babel](https://babeljs.io/))
+* [Sass](https://github.com/dlmanning/gulp-sass) (with [Autoprefixer](https://autoprefixer.github.io/))
+* [Browserify](http://browserify.org/)
 * [BrowserSync](http://www.browsersync.io/)
+* [cssnano](http://cssnano.co) for CSS and [uglify](https://www.npmjs.com/package/uglify) for JavaScript
 
 ### Django Packages
 
