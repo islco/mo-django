@@ -46,6 +46,7 @@ Create the database specified in *.env*, run the initial model migration,
 and create a super user:
 
 ```
+createdb {{ cookiecutter.package_name }}
 foreman run python manage.py migrate
 foreman run python manage.py createsuperuser
 ```
