@@ -84,9 +84,6 @@ WSGI_APPLICATION = '{{ cookiecutter.package_name }}.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASE_URL_DEFAULT = 'sqlite:///{}'.format(
-    os.path.join(PROJECT_ROOT, 'dev.sqlite'))
-
 DATABASES = {
     'default': dj_database_url.config(),
 }
