@@ -17,6 +17,11 @@ of note.
 
 ## Developing
 
+### Requirements
+
+* Python 3
+* [foreman](http://ddollar.github.io/foreman/)
+
 ### Python and Django
 
 First you need to configure your environment:
@@ -41,8 +46,8 @@ Create the database specified in *.env*, run the initial model migration,
 and create a super user:
 
 ```
-python manage.py migrate
-python manage.py createsuperuser
+foreman run python manage.py migrate
+foreman run python manage.py createsuperuser
 ```
 
 ### Front End Tools

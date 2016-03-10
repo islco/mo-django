@@ -88,7 +88,7 @@ DATABASE_URL_DEFAULT = 'sqlite:///{}'.format(
     os.path.join(PROJECT_ROOT, 'dev.sqlite'))
 
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL_DEFAULT),
+    'default': dj_database_url.config(),
 }
 
 # Internationalization
