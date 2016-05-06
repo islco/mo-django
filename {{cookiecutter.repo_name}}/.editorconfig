@@ -6,11 +6,11 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{py,rst,ini}]
+[*.{py,rst,ini,html,css,scss}]
 indent_style = space
 indent_size = 4
 
-[*.{html,css,scss,js,json,yml}]
+[*.{js,json,yml}]
 indent_style = space
 indent_size = 2
 
