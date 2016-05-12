@@ -44,10 +44,6 @@ INSTALLED_APPS = (
 if DEBUG:
     INSTALLED_APPS += ('debug_toolbar',)
 
-{% if cookiecutter.use_rq == "y" -%}
-INSTALLED_APPS += ('django_rq',)
-{%- endif %}
-
 MIDDLEWARE_CLASSES = (
     'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -116,7 +112,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SSLIFY_DISABLE = config('SSLIFY_DISABLE', default=False, cast=bool)
 
 {% if cookiecutter.use_rq == "y" -%}
+
 # rq
+
+INSTALLED_APPS += ('django_rq',)
 
 RQ_QUEUES = {
     'default': {
@@ -129,4 +128,17 @@ RQ_QUEUES = {
         'URL': config('REDIS_URL', default='redis://localhost:6379/0'),
     },
 }
+{%- endif %}
+
+{% if cookiecutter.use_sentry == "y" -%}
+
+# Sentry
+
+SENTRY_DSN = config('SENTRY_DSN', default=None)
+
+if SENTRY_DSN:
+    INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
+    RAVEN_CONFIG = {
+        'dsn': SENTRY_DSN,
+    }
 {%- endif %}

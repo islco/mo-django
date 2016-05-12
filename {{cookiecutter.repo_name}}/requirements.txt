@@ -25,5 +25,5 @@ django-rq>=0.9,<0.10
 {%- endif %}
 
 {% if cookiecutter.use_sentry == "y" -%}
-raven>=5.10,<5.11
+raven>=5.16,<5.17
 {%- endif %}
