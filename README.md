@@ -2,7 +2,7 @@
 
 A [cookiecutter](https://github.com/audreyr/cookiecutter) template for ISL Django projects.
 
-![CircleCI status](https://circleci.com/gh/istrategylabs/mo-django.svg?style=shield&circle-token=38869a7727871482106bc911010264ecd8850947)
+[![CircleCI status](https://circleci.com/gh/istrategylabs/mo-django.svg?style=shield&circle-token=38869a7727871482106bc911010264ecd8850947)](https://circleci.com/gh/istrategylabs/mo-django)
 
 ## Features
 
