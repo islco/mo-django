@@ -1,4 +1,5 @@
 import pytest
+from contextlib import contextmanager
 
 
 @pytest.fixture
@@ -19,13 +20,26 @@ def context():
     }
 
 
-def test_mo_django(cookies, context):
+# utility methods
 
+@contextmanager
+def content_of(project, path):
+    f = project.join(path)
+    assert f.check(), '{} does not exist'.format(path)
+    yield f.read()
+
+
+def generate(cookies, context):
     result = cookies.bake(extra_context=context)
-
     assert result.exit_code == 0
     assert result.exception is None
+    return result
 
+
+# test methods
+
+def test_mo_django(cookies, context):
+    result = generate(cookies, context)
     assert result.project.basename == context['repo_name']
     assert result.project.isdir()
 
@@ -35,10 +49,7 @@ def test_mo_django_postgres(cookies, context):
     context = context.copy()
     context['use_postgres'] = 'y'
 
-    result = cookies.bake(extra_context=context)
-
-    assert result.exit_code == 0
-    assert result.exception is None
+    result = generate(cookies, context)
 
     f = result.project.join('requirements.txt')
     assert f.check()
@@ -50,17 +61,62 @@ def test_mo_django_sentry(cookies, context):
     context = context.copy()
     context['use_sentry'] = 'y'
 
-    result = cookies.bake(extra_context=context)
+    result = generate(cookies, context)
 
-    assert result.exit_code == 0
-    assert result.exception is None
+    with content_of(result.project, 'requirements.txt') as content:
+        assert 'raven' in content
 
-    f = result.project.join('requirements.txt')
-    assert f.check()
-    assert 'raven' in f.read()
+    with content_of(result.project, 'mo_django_test/settings.py') as content:
+        assert 'raven' in content
+        assert 'SENTRY_DSN' in content
 
-    f = result.project.join('mo_django_test/settings.py')
-    assert f.check()
-    content = f.read()
-    assert 'raven' in content
-    assert 'SENTRY_DSN' in content
+
+def test_mo_django_rq(cookies, context):
+
+    context = context.copy()
+    context['use_rq'] = 'y'
+
+    result = generate(cookies, context)
+
+    with content_of(result.project, 'Procfile') as content:
+        assert 'rqworker' in content
+
+    with content_of(result.project, 'Procfile.dev') as content:
+        assert 'rqworker' in content
+
+    with content_of(result.project, 'requirements.txt') as content:
+        assert 'django-rq' in content
+
+    with content_of(result.project, 'mo_django_test/settings.py') as content:
+        assert 'django_rq' in content
+        assert 'RQ_QUEUES' in content
+
+    with content_of(result.project, 'mo_django_test/urls.py') as content:
+        assert 'django_rq' in content
+
+
+def test_mo_django_redis(cookies, context):
+
+    context = context.copy()
+    context['use_redis'] = 'y'
+
+    result = generate(cookies, context)
+
+    with content_of(result.project, 'requirements.txt') as content:
+        assert 'django-redis' in content
+
+
+def test_mo_django_foundation_sites(cookies, context):
+
+    context = context.copy()
+    context['use_foundation_sites'] = 'y'
+
+    result = generate(cookies, context)
+
+    with content_of(result.project, 'gulpfile.js') as content:
+        assert 'foundation-sites' in content
+
+    with content_of(result.project, 'package.json') as content:
+        assert 'foundation-sites' in content
+        assert 'jquery' in content
+        assert 'browserify-shim' in content
