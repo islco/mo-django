@@ -2,3 +2,4 @@ cookiecutter>=1.4,<1.5
 pytest>=2.9,<2.10
 pytest-cookies>=0.2,<0.3
 tox>=2.3,<2.4
+tox-pyenv>=1.0,<1.1
