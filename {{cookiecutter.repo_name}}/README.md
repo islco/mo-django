@@ -64,7 +64,7 @@ npm install
 Do an initial build of assets:
 
 ```
-gulp build
+npm run build
 ```
 
 
