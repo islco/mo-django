@@ -1,9 +1,11 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from {{ cookiecutter.package_name }}.views import HomePageView
+
 urlpatterns = [
     # Examples:
-    # url(r'^$', '{{ cookiecutter.package_name }}.views.home', name='home'),
+    url(r'^$', HomePageView.as_view(), name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     {% if cookiecutter.use_rq == "y" -%}

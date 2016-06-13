@@ -9,10 +9,11 @@ A [cookiecutter](https://github.com/audreyr/cookiecutter) template for ISL Djang
 * [editorconfig](http://editorconfig.org/)
 * [ES2015](http://www.ecma-international.org/ecma-262/6.0/index.html) support via [Babel](https://babeljs.io)
 * [Gulp](http://gulpjs.com/)
-* [Sass](https://github.com/dlmanning/gulp-sass) (with [Autoprefixer](https://autoprefixer.github.io/))
+* [SASS](https://github.com/dlmanning/gulp-sass) (w/[Autoprefixer](https://autoprefixer.github.io/))
 * [Browserify](http://browserify.org/)
 * [BrowserSync](http://www.browsersync.io/)
-* [cssnano](http://cssnano.co) for CSS and [uglify](https://www.npmjs.com/package/uglify) for JavaScript
+* [UglifyJS](https://github.com/mishoo/UglifyJS2/)
+* [CleanCSS](https://github.com/jakubpawlowicz/clean-css/tree/3.4)
 
 ### Django Packages
 
@@ -36,7 +37,7 @@ Optional packages include:
 
 First, make sure you have [cookiecutter](https://github.com/audreyr/cookiecutter) installed. If you are using OS X, [Homebrew](http://brew.sh) can take care of that for you:
 
-	brew install cookiecutter
+    brew install cookiecutter
 
 Cookiecutter templates can be installed directly from GitHub. Navigate to the directory where you want your project to be created and run:
 
