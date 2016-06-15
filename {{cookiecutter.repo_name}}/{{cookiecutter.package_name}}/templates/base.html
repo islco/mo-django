@@ -1,0 +1,56 @@
+{% raw %}
+{% load static from staticfiles %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% endraw %}{{ cookiecutter.project_name }}{% raw %}</title>
+        <meta name="description" content="{% endraw %}{{ cookiecutter.description }}{% raw %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon-precomposed" href="/favicon-152.png">
+
+        {# Facebook Open Graph Tags #}
+        <meta property="og:title" content="" />
+        <meta property="og:site_name" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:description" content="" />
+        <meta property="fb:app_id" content="">
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="" />
+
+        {# Twitter Summary Card with Large Image tags #}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:creator" content="">
+        <meta name="twitter:title" content="">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:image" content="">
+
+        <link rel="stylesheet" href="{% static 'css/app.css' %}">
+        <script src="{% static 'js/bundle.js' %}" async defer></script>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock content %}
+
+        {# Structured Data for Logo and Social Profile Links #}
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "Organization",
+                "name": "",
+                "url": "",
+                "logo": "",
+                "sameAs": [
+                    {# "http://www.facebook.com/", #}
+                    {# "http://instagram.com/", #}
+                    {# "http://www.twitter.com/", #}
+                    {# "http://plus.google.com/" #}
+                    {# "http://youtube.com/" #}
+                ]
+            }
+        </script>
+    </body>
+</html>{% endraw %}
