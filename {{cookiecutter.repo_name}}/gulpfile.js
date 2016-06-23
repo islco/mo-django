@@ -79,8 +79,13 @@ gulp.task('extras', () => {
 gulp.task('watch', ['watchify'], () => {
   const browserSync = require('browser-sync').create()
   browserSync.init({
-    proxy: '127.0.0.1:8000',
-    files: './public/**/*'
+    proxy: '127.0.0.1:' + (parseInt(process.env.PORT, 10) - 100), // subtract 100 because foreman adds 100 to each success worker in the Procfile
+    files: './public/**/*',
+    open: false,
+    port: process.env.PORT,
+    ui: {
+      port: (parseInt(process.env.PORT, 10) + 1)
+    }
   })
 
   gulp.watch('./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss', ['sass']);

@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "description": "{{ cookiecutter.description }}",
   "scripts": {
-    "postinstall": "gulp build:production",
     "build": "gulp build:production",
-    "start": "gulp dev",
-    "watch": "gulp dev"
+    "watch": "gulp dev",
+    "postinstall": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build; fi"
   },
   "author": "{{ cookiecutter.author_name }}",
   "dependencies": {
