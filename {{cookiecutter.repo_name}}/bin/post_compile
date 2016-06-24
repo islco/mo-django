@@ -1,1 +1,8 @@
-python manage.py migrate
+#!/usr/bin/env bash
+
+indent() {
+    sed "s/^/       /"
+}
+
+echo "     $ python manage.py migrate"
+python manage.py migrate 2>&1 | indent
