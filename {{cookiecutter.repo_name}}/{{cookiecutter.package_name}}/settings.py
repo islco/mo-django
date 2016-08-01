@@ -85,6 +85,7 @@ WSGI_APPLICATION = '{{ cookiecutter.package_name }}.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(),
 }
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
