@@ -193,3 +193,9 @@ heroku addons:create ssl:endpoint
 Follow the
 [SSL Endpoint documentation](https://devcenter.heroku.com/articles/ssl-endpoint)
 to upload the custom cert and finish configuration.
+
+## Operational Notes
+
+{% if cookiecutter.use_rq == 'y' -%}
+The setting `RQ_SHOW_ADMIN_LINK = True` tells django-rq to override the base django admin template. If your project wants to override the base admin template, you should disable this feature and add a link to django-rq yourself. [Documentation](https://github.com/ui/django-rq#queue-statistics)
+{%- endif %}

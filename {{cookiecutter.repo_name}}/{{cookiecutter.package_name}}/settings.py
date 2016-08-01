@@ -130,6 +130,7 @@ RQ_QUEUES = {
         'URL': config('REDIS_URL', default='redis://localhost:6379/0'),
     },
 }
+RQ_SHOW_ADMIN_LINK = True
 {%- endif %}
 
 {% if cookiecutter.use_sentry == "y" -%}
