@@ -1,5 +1,5 @@
-web: python manage.py runserver 0.0.0.0:$PORT
+web: PYTHONUNBUFFERED=True python manage.py runserver 0.0.0.0:$PORT
 static: npm run watch
 {% if cookiecutter.use_rq == "y" -%}
-rqworker: python manage.py rqworker high default low
+rqworker: PYTHONUNBUFFERED=True python manage.py rqworker high default low
 {%- endif %}
