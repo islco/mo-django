@@ -4,9 +4,7 @@
     "stylelint-selector-bem-pattern"
   ],
   "rules": {
-    "indentation": [ 4, {
-      "hierarchicalSelectors": true
-    } ],
+    "indentation": "spaces",
     "max-empty-lines": 2,
     "property-no-vendor-prefix": true,
     "rule-nested-empty-line-before":  [ "always-multi-line", {
