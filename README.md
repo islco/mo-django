@@ -20,7 +20,6 @@ A [cookiecutter](https://github.com/audreyr/cookiecutter) template for ISL Djang
 * [Django 1.9](https://www.djangoproject.com)
 * [dj-database-url](https://github.com/kennethreitz/dj-database-url)
 * [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar)
-* [django-sslify](https://github.com/rdegges/django-sslify)
 * [python-decouple](https://github.com/henriquebastos/python-decouple/)
 * [pytz](http://pytz.sourceforge.net)
 * [waitress](http://waitress.readthedocs.org/en/latest/)

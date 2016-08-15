@@ -4,7 +4,6 @@ whitenoise>=2.0,<2.1
 
 dj-database-url==0.4.1
 django-debug-toolbar>=1.4,<1.5
-django-sslify==0.2.7
 
 python-decouple==3.0
 pytz==2015.7
