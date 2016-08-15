@@ -35,7 +35,6 @@
     "gulp-uglify": "1.4.2",
     "gulp-util": "3.0.6",
     {% if cookiecutter.use_foundation_sites == 'y' -%}"jquery": "3.0.0",{%- endif %}
-    "nconf": "0.8.4",
     "run-sequence": "1.1.4",
     "stylelint-config-standard": "11.0.0",
     "stylelint-selector-bem-pattern": "1.0.0",
