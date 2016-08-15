@@ -1,19 +1,20 @@
 {
   "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "{{ cookiecutter.repo_name }}/static_src/scss/_settings.scss"
+  ],
   "plugins": [
     "stylelint-selector-bem-pattern"
   ],
   "rules": {
-    "indentation": [ 4, {
-      "hierarchicalSelectors": true
-    } ],
+    "indentation": null,
     "max-empty-lines": 2,
     "property-no-vendor-prefix": true,
     "rule-nested-empty-line-before":  [ "always-multi-line", {
       except: ["first-nested"],
       ignore: ["after-comment"]
     } ],
-    "selector-bem-pattern": {
+    "plugin/selector-bem-pattern": {
       "preset": "bem"
     }
   }
