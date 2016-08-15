@@ -11,8 +11,7 @@ gulp.task('build', (done) => {
 })
 
 gulp.task('build:production', (done) => {
-  runSequence('build', ['minify:css', 'minify:js'],
-              'purifycss', 'critical', done)
+  runSequence('build', ['minify:css', 'minify:js'], done)
 })
 
 gulp.task('watch', ['build', 'watchify'], () => {
