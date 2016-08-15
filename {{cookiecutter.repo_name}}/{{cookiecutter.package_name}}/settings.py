@@ -113,6 +113,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SSLIFY_DISABLE = config('SSLIFY_DISABLE', default=False, cast=bool)
 
+{% if cookiecutter.use_redis == "y" -%}
+
+# redis
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': config('REDIS_URL', default='redis://localhost:6379/0'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    },
+}
+
+{%- endif %}
+
 {% if cookiecutter.use_rq == "y" -%}
 
 # rq
