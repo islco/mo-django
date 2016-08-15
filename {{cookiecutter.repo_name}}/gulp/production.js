@@ -8,13 +8,13 @@ const BANNER = fs.readFileSync('banner.txt', 'utf8').replace('@date', (new Date(
 
 
 gulp.task('minify:css', () =>
-  gulp.src('./{{ cookiecutter.package_name }}/static/**/*-*.css')
+  gulp.src('./{{ cookiecutter.package_name }}/static/**/*.css')
     .pipe(cleancss())
     .pipe(header(BANNER))
     .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/')))
 
 gulp.task('minify:js', () =>
-  gulp.src('./{{ cookiecutter.package_name }}/static/**/*-*.js')
+  gulp.src('./{{ cookiecutter.package_name }}/static/**/*.js')
     .pipe(uglify({
       preserveComments: 'license',
       compressor: {
