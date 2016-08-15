@@ -1,7 +1,7 @@
 {
   "extends": "stylelint-config-standard",
   "ignoreFiles": [
-    "src/scss/_settings.scss"
+    "{{ cookiecutter.repo_name }}/static_src/scss/_settings.scss"
   ],
   "plugins": [
     "stylelint-selector-bem-pattern"
