@@ -46,7 +46,7 @@ INSTALLED_APPS = (
 if DEBUG and config('DEBUG_TOOLBAR', default=True, cast=bool):
     INSTALLED_APPS += ('debug_toolbar',)
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 ROOT_URLCONF = '{{ cookiecutter.package_name }}.urls'
 
