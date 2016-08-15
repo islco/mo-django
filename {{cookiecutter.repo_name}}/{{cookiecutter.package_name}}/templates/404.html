@@ -1,0 +1,28 @@
+<!doctype html>
+<!--
+Error pages should be built such that they require zero dependency on anything whatsoever.
+That means static HTML with inline CSS and base64-encoded images.
+The following are banned from every error page:
+- All <script> tags with a `src` attribute.
+- All JavaScript that loads external data.
+- All <link> tags.
+- All <img> tags with an src pointing to a URL.
+Based on: http://istrat.gy/29BOa8R
+-->
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Page Not Found &middot; {{ cookiecutter.project_name }}</title>
+        <style media="screen">
+            body {
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>404 Page Not Found</h1>
+    </body>
+</html>

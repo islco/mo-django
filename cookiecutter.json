@@ -2,7 +2,7 @@
     "project_name": "Project Name",
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
     "package_name": "{{ cookiecutter.repo_name|lower|replace('-', '') }}",
-    "author_name": "ISL",
+    "author": "ISL",
     "email": "dev@isl.co",
     "description": "",
     "domain_name": "example.isl.codes",

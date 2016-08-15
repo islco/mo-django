@@ -113,7 +113,7 @@ def test_mo_django_foundation_sites(cookies, context):
 
     result = generate(cookies, context)
 
-    with content_of(result.project, 'gulpfile.js') as content:
+    with content_of(result.project, 'gulp/build.js') as content:
         assert 'foundation-sites' in content
 
     with content_of(result.project, 'package.json') as content:
