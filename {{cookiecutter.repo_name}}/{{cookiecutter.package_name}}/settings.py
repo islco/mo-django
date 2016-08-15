@@ -134,7 +134,7 @@ CACHES = {
 
 # rq
 
-INSTALLED_APPS += ('django_rq',)
+INSTALLED_APPS += ('django_rq', 'django_rq_wrapper', )
 
 RQ_QUEUES = {
     'default': {
