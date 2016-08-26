@@ -1,5 +1,7 @@
 web: PYTHONUNBUFFERED=True python manage.py runserver 0.0.0.0:$PORT
+{% if cookiecutter.use_mo_static == "y" -%}
 static: npm run dev
+{%- endif %}
 {% if cookiecutter.use_rq == "y" -%}
 rqworker: PYTHONUNBUFFERED=True python manage.py rqworkers high default low --autoreload True
 {%- endif %}

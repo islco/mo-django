@@ -12,9 +12,11 @@
     "heroku-postgresql:hobby-dev"
   ],
   "buildpacks": [
+    {% if cookiecutter.use_mo_static == "y" -%}
     {
       "url": "heroku/nodejs"
     },
+    {%- endif %}
     {
       "url": "heroku/python"
     }

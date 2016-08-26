@@ -10,5 +10,6 @@
     "use_sentry": "y",
     "use_rq": "n",
     "use_redis": "{{ cookiecutter.use_rq }}",
-    "use_foundation_sites": "y"
+    "use_mo_static": "y",
+    "use_foundation_sites": "{{ cookiecutter.use_mo_static }}"
 }
