@@ -5,6 +5,9 @@ whitenoise>=3.2,<3.3
 dj-database-url==0.4.1
 django-debug-toolbar>=1.6,<1.7
 
+django-storages>=1.5,<1.6
+boto>=2.39,<2.40
+
 python-decouple==3.0
 pytz==2015.7
 sqlparse>=0.2,<0.3

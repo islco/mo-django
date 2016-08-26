@@ -110,7 +110,25 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Media
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
+MEDIA_URL = '/media/'
+# AWS Settings for Storages
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
+if not (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME):
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
+else:
+    INSTALLED_APPS += ('storages',)
+    if config('AWS_S3_CUSTOM_DOMAIN', default=None):
+        AWS_S3_URL_PROTOCOL = 'https:'
+        AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN', default='')
+    AWS_DEFAULT_ACL = 'private'
+    AWS_QUERYSTRING_AUTH = True
+    AWS_QUERYSTRING_EXPIRE = 60 * 60 * 24
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_LOCATION = 'media'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 
 # SSL
 
