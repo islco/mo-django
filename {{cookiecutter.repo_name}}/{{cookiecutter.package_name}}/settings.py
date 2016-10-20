@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     '{{ cookiecutter.package_name }}',
 )
 
-if DEBUG:
+if DEBUG and config('DEBUG_TOOLBAR', default=True, cast=bool):
     INSTALLED_APPS += ('debug_toolbar',)
 
 MIDDLEWARE_CLASSES = (
