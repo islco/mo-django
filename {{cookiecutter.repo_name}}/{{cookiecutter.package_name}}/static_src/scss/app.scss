@@ -1,7 +1,7 @@
-@charset "utf-8";
-@import "settings";
+@charset 'utf-8';
+@import 'settings';
 {% if cookiecutter.use_foundation_sites == 'y' -%}
-@import "foundation";
+@import 'foundation';
 @include foundation-global-styles;
 @include foundation-flex-grid;
 @include foundation-typography;
