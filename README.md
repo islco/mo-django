@@ -46,8 +46,10 @@ Cookiecutter templates can be installed directly from GitHub. Navigate to the di
 
 Answer the questions as you are prompted. Once the project has been generated, navigate to your project and link it to github with:
 
+    cd yourprojectname
     git init
     git remote add origin git@github.com:organization/repo-name.git
+    git add .
     git commit -am 'Mo init'
     git push -u origin master
 
