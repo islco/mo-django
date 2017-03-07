@@ -25,5 +25,5 @@ django-rq-wrapper>=1.0,<2.0
 {%- endif %}
 
 {% if cookiecutter.use_sentry == "y" -%}
-raven>=5.16,<5.17
+raven>=6.00,<7.00
 {%- endif %}
