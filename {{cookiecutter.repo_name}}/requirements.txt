@@ -1,4 +1,4 @@
-Django>=1.10,<1.11
+Django>=1.11,<2.00
 waitress>=1.0,<1.1
 whitenoise>=3.3,<3.4
 
