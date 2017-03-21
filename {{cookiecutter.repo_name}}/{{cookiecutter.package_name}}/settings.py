@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     '{{ cookiecutter.package_name }}',
+    '{{ cookiecutter.package_name }}.users',
 )
 
 MIDDLEWARE = [
@@ -188,3 +189,6 @@ if SENTRY_DSN:
         'dsn': SENTRY_DSN,
     }
 {%- endif %}
+
+
+AUTH_USER_MODEL = 'users.User'
