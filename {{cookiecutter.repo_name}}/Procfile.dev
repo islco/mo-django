@@ -1,5 +1,6 @@
 web: PYTHONUNBUFFERED=True python manage.py runserver 0.0.0.0:$PORT
 static: npm run dev
 {% if cookiecutter.use_rq == "y" -%}
+redis: redis-server
 rqworker: PYTHONUNBUFFERED=True python manage.py rqworkers high default low --autoreload True
 {%- endif %}
