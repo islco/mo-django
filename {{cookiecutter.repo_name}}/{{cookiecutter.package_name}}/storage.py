@@ -5,7 +5,7 @@ from whitenoise.django import GzipManifestStaticFilesStorage
 
 class DebugErroringGzipManifestStaticFilesStorage(GzipManifestStaticFilesStorage):
 
-    def url(self, name):
+    def url(self, name, force=False):
         if settings.DEBUG:
             if finders.find(name) is None:
                 raise ValueError("The file '%s' could not be found with %r." % (name, self))
