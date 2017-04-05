@@ -6,7 +6,7 @@
     "build": "gulp build:production",
     "lint": "stylelint ./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss && eslint ./{{ cookiecutter.package_name }}/static_src/js/**/*.js",
     "dev": "gulp watch",
-    "postinstall": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build; fi",
+    "postinstall": "if [ \"$NODE_ENV\" == \"production\" ]; then npm run build; fi",
     "tinify": "gulp tinify"
   },
   "author": "{{ cookiecutter.author }}",
