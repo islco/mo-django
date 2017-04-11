@@ -50,7 +50,7 @@ createdb {{ cookiecutter.package_name }}
 foreman run python manage.py migrate
 foreman run python manage.py createsuperuser
 ```
-
+{% if cookiecutter.use_mo_static == 'y' -%}
 ### Front End Tools
 
 Use [nvm](https://github.com/creationix/nvm) to install the correct version
@@ -66,7 +66,7 @@ Do an initial build of assets:
 ```
 npm run build
 ```
-
+{%- endif %}
 
 ## Running the Project
 
