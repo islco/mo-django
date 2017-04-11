@@ -61,6 +61,7 @@ if DEBUG and config('DEBUG_TOOLBAR', default=True, cast=bool):
     MIDDLEWARE.append(
         'debug_toolbar.middleware.DebugToolbarMiddleware')
 
+INTERNAL_IPS = '127.0.0.1'
 
 ROOT_URLCONF = '{{ cookiecutter.package_name }}.urls'
 
