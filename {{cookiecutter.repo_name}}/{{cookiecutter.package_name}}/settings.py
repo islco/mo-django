@@ -108,7 +108,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 
-STATICFILES_STORAGE = '{{cookiecutter.package_name}}.storage.DebugErroringGzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = '{{ cookiecutter.package_name }}.storage.DebugErroringGzipManifestStaticFilesStorage'
 
 WHITENOISE_ROOT = os.path.join(PROJECT_ROOT, 'public')
 
