@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django_rq',
+    'django_rq_wrapper',
     '{{ cookiecutter.package_name }}',
     '{{ cookiecutter.package_name }}.users',
 )
@@ -55,9 +56,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTH_USER_MODEL = 'users.User'
+
 if DEBUG and config('DEBUG_TOOLBAR', default=True, cast=bool):
     INSTALLED_APPS += ('debug_toolbar',)
-
     MIDDLEWARE.append(
         'debug_toolbar.middleware.DebugToolbarMiddleware')
 
@@ -108,29 +110,37 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 
-STATICFILES_STORAGE = '{{ cookiecutter.package_name }}.storage.DebugErroringGzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = '{{ cookiecutter.package_name }}.' \
+    'storage.DebugErroringGzipManifestStaticFilesStorage'
 
 WHITENOISE_ROOT = os.path.join(PROJECT_ROOT, 'public')
 
 # Media
 
 MEDIA_URL = '/media/'
+
 # AWS Settings for Storages
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
+
 if not (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME):
     MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
+
 else:
+
     INSTALLED_APPS += ('storages',)
+
     if config('AWS_S3_CUSTOM_DOMAIN', default=None):
         AWS_S3_URL_PROTOCOL = 'https:'
         AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN', default='')
+
     AWS_DEFAULT_ACL = 'private'
     AWS_QUERYSTRING_AUTH = True
     AWS_QUERYSTRING_EXPIRE = 60 * 60 * 24
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = 'media'
+
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
@@ -141,7 +151,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = SECURE_SSL_REDIRECT
 CSRF_COOKIE_SECURE = SECURE_SSL_REDIRECT
 
-{% if cookiecutter.use_redis == "y" -%}
 
 # redis
 
@@ -156,13 +165,7 @@ CACHES = {
     },
 }
 
-{%- endif %}
-
-{% if cookiecutter.use_rq == "y" -%}
-
 # rq
-
-INSTALLED_APPS += ('django_rq', 'django_rq_wrapper', )
 
 RQ_QUEUES = {
     'default': {
@@ -175,10 +178,9 @@ RQ_QUEUES = {
         'URL': config('REDIS_URL', default='redis://localhost:6379/0'),
     },
 }
-RQ_SHOW_ADMIN_LINK = True
-{%- endif %}
 
-{% if cookiecutter.use_sentry == "y" -%}
+RQ_SHOW_ADMIN_LINK = True
+
 
 # Sentry
 
@@ -189,7 +191,3 @@ if SENTRY_DSN:
     RAVEN_CONFIG = {
         'dsn': SENTRY_DSN,
     }
-{%- endif %}
-
-
-AUTH_USER_MODEL = 'users.User'

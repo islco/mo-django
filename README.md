@@ -8,7 +8,14 @@ A [cookiecutter](https://github.com/audreyr/cookiecutter) template for ISL Djang
 
 ## Features
 
+### Development Environment
+
 * [editorconfig](http://editorconfig.org/)
+* [eslint](http://eslint.org)
+* [stylelint](https://stylelint.io)
+
+### Front-end
+
 * [ES2015](http://www.ecma-international.org/ecma-262/6.0/index.html) support via [Babel](https://babeljs.io)
 * [Gulp](http://gulpjs.com/)
 * [SASS](https://github.com/dlmanning/gulp-sass) (w/[Autoprefixer](https://autoprefixer.github.io/))
@@ -17,22 +24,25 @@ A [cookiecutter](https://github.com/audreyr/cookiecutter) template for ISL Djang
 * [UglifyJS](https://github.com/mishoo/UglifyJS2/)
 * [CleanCSS](https://github.com/jakubpawlowicz/clean-css/tree/3.4)
 
-### Django Packages
+### Python Packages
 
-* [Django 1.9](https://www.djangoproject.com)
+* [Django 1.10](https://www.djangoproject.com)
 * [dj-database-url](https://github.com/kennethreitz/dj-database-url)
 * [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar)
+* [django-redis](https://github.com/niwinz/django-redis)
+* [django-rq](https://github.com/ui/django-rq)
+* [django-rq-wrapper](https://github.com/istrategylabs/django-rq-wrapper)
 * [django-storages](https://github.com/jschneier/django-storages/)
+* [psycopg2](http://initd.org/psycopg/)
 * [python-decouple](https://github.com/henriquebastos/python-decouple/)
 * [pytz](http://pytz.sourceforge.net)
+* [raven](https://github.com/getsentry/raven-python)
+* [rq](http://python-rq.org)
+
+mo-django is served with:
+
 * [waitress](http://waitress.readthedocs.org/en/latest/)
 * [whitenoise](http://whitenoise.readthedocs.org/en/stable/)
-
-Optional packages include:
-
-* [rq](http://python-rq.org)
-* [django-redis](https://github.com/niwinz/django-redis)
-* [psycopg2](http://initd.org/psycopg/)
 
 
 ## Starting a new project

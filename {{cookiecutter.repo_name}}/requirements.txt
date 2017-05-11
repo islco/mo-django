@@ -1,32 +1,17 @@
-Django>=1.10,<1.11
-waitress>=1.0,<1.1
-whitenoise>=3.3,<3.4
-
-dj-database-url==0.4.2
-django-debug-toolbar>=1.7,<1.8
-
-django-storages>=1.5,<1.6
 boto>=2.46,<2.47
-
-python-decouple==3.0
-pytz==2016.10
-sqlparse>=0.2,<0.3
-
-{% if cookiecutter.use_postgres == 'y' -%}
-psycopg2>=2.7,<2.8
-{%- endif %}
-
-{% if cookiecutter.use_redis == 'y' -%}
-redis>=2.10,<2.11
+dj-database-url==0.4.2
+Django>=1.10,<1.11
+django-debug-toolbar>=1.7,<1.8
 django-redis>=4.7,<4.8
-{%- endif %}
-
-{% if cookiecutter.use_rq == "y" -%}
-rq>=0.7,<0.8
 django-rq>=0.9,<0.10
 django-rq-wrapper>=2.1,<2.2
-{%- endif %}
-
-{% if cookiecutter.use_sentry == "y" -%}
+django-storages>=1.5,<1.6
+psycopg2>=2.7,<2.8
+python-decouple==3.0
+pytz==2016.10
 raven>=6.00,<7.00
-{%- endif %}
+redis>=2.10,<2.11
+rq>=0.7,<0.8
+sqlparse>=0.2,<0.3
+waitress>=1.0,<1.1
+whitenoise>=3.3,<3.4

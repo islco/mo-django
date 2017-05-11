@@ -1,7 +1,7 @@
 //  {{ cookiecutter.project_name }} Settings
 //  -----------------------------
 
-{% if cookiecutter.use_foundation_sites == 'y' -%}//  Foundation for Sites Settings
+//  Foundation for Sites Settings
 //  -----------------------------
 //
 //  Table of Contents:
@@ -565,4 +565,4 @@ $topbar-padding: 0.5rem;
 $topbar-background: $light-gray;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 1rem;
-$topbar-input-width: 200px;{%- endif %}
+$topbar-input-width: 200px;

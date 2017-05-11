@@ -16,6 +16,9 @@
       "url": "heroku/nodejs"
     },
     {
+      "url": "https://github.com/istrategylabs/heroku-buildpack-node-cleanup"
+    },
+    {
       "url": "heroku/python"
     }
   ]
