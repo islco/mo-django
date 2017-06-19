@@ -5,14 +5,12 @@ import './gulp/production'
 import './gulp/utils'
 import EXTRAS_GLOB from './gulp/build'
 
-
 gulp.task('build', (done) => {
-  runSequence('clean', ['webpack', 'nunjucks', 'css', 'extras'], done)
+  runSequence('clean', ['webpack', 'css', 'extras'], done)
 })
 
 gulp.task('build:production', (done) => {
-  runSequence('build', 'rev:replace', ['minify:html', 'minify:css', 'minify:js'],
-              'purifycss', 'critical', done)
+  runSequence('build', ['minify:css', 'minify:js'], done)
 })
 
 gulp.task('watch', ['build'], () => {

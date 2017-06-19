@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 const config = {
   devtool: 'source-map',
-  entry: './{{ cookiecutter.package_name }}/stati_srcc/js/app',
+  entry: './{{ cookiecutter.package_name }}/static_src/js/app',
   output: {
     path: path.resolve(__dirname, 'public/static/js'),
     filename: 'bundle.js'
