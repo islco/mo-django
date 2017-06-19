@@ -1,0 +1,24 @@
+.Code {
+    background-color: #efefef;
+    border: 1px solid #dcdcdc;
+    font-size: 0.9rem;
+}
+
+.Figurebox {
+    background-color: #e4e4e4;
+    border: 1px solid #ccc;
+    font-family: 'Menlo', 'Monaco', serif;
+    font-size: 0.8rem;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.Grid--demo {
+    @media(--md-viewport) {
+        margin-bottom: 1rem !important;
+    }
+
+    @media(--sm-only-viewport) {
+        color: #f00;
+    }
+}

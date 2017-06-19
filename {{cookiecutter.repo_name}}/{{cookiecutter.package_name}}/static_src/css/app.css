@@ -1,0 +1,32 @@
+@import 'components/Foo';
+@import '_help'; /* remove this helpfile once not needed anymore */
+
+@import 'suitcss';
+
+/* custom media queries */
+@custom-media --sm-viewport (min-width: 0);
+@custom-media --sm-only-viewport (max-width: 750px);
+@custom-media --md-viewport (min-width: 750px);
+@custom-media --md-only-viewport (min-width: 750px) and (max-width: 960px);
+@custom-media --lg-viewport (min-width: 960px);
+
+:root {
+    --Grid-gutter-size: 10px; /* suitcss property overwrite */
+    --Grid-max-width: 1200px; /* custom property */
+
+    --font-family: 'Helvetica Neue', Arial, sans-serif;
+    --font-size: 1rem;
+
+    --primary-color: #43d8f8;
+    --secondary-color: #f00;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+}
+
+.Grid {
+    margin: 0 auto;
+    max-width: var(--Grid-max-width);
+}
