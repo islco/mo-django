@@ -1,6 +1,5 @@
 {
   "presets": ["es2015"],
-  "plugins": ["syntax-trailing-function-commas"]{% if cookiecutter.use_foundation_sites == 'y' -%},
+  "plugins": ["syntax-trailing-function-commas"],
   "ignore": "jquery"
-{%- endif %}
 }

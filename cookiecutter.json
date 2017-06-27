@@ -3,12 +3,6 @@
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
     "package_name": "{{ cookiecutter.repo_name|lower|replace('-', '') }}",
     "author": "ISL",
-    "email": "dev@isl.co",
     "description": "",
-    "domain_name": "example.isl.codes",
-    "use_postgres": "y",
-    "use_sentry": "y",
-    "use_rq": "n",
-    "use_redis": "{{ cookiecutter.use_rq }}",
-    "use_foundation_sites": "y"
+    "domain_name": "example.isl.codes"
 }

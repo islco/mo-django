@@ -19,8 +19,11 @@ of note.
 
 ### Requirements
 
-* Python 3
+* [Python 3](https://www.python.org) (with [pip](https://pip.pypa.io/en/stable/) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/))
 * [foreman](http://ddollar.github.io/foreman/)
+* [PostgreSQL](https://www.postgresql.org)
+* [Redis](https://redis.io)
+* [nvm](https://github.com/creationix/nvm)
 
 ### Python and Django
 
@@ -30,10 +33,8 @@ First you need to configure your environment:
 cp env.example .env
 ```
 
-Edit *.env* and set the values you need to run the project locally. When you
-start working on the project, run `source .env` or use
-[autoenv](https://github.com/kennethreitz/autoenv) to load the
-environment variables.
+Edit *.env* and set the values you need to run the project locally. Foreman will take care
+of loading these values into the environment when you execute a command.
 
 Next, create a Python 3 virtual environment and install the requirements:
 
@@ -54,7 +55,7 @@ foreman run python manage.py createsuperuser
 
 ### Front End Tools
 
-Use [nvm](https://github.com/creationix/nvm) to install the correct version
+Use nvm to install the correct version
 of Node.js and install the front-end dependencies:
 
 ```
@@ -77,14 +78,7 @@ First load the virtualenv:
 workon {{ cookiecutter.repo_name }}
 ```
 
-Then use [foreman](http://ddollar.github.io/foreman/) (or [forego](https://github.com/ddollar/forego)) to run the development processes:
-To install foreman:
-
-```
-gem install foreman
-```
-
-After foreman is up and running use:
+Then use [foreman](http://ddollar.github.io/foreman/) to run the development processes:
 
 ```
 foreman start -f Procfile.dev
@@ -94,7 +88,7 @@ foreman start -f Procfile.dev
 
 * web: the Django development server
 * static: the gulp watch process
-{% if cookiecutter.use_rq == 'y' -%}* rqworker: the RQ worker process (high, low, and default){%- endif %}
+* rqworker: the RQ worker process (high, low, and default)
 
 `foreman start -f Procfile.dev` will start all of the processes at once. If you
 want to run a specific process, you can specify it directly:
@@ -103,13 +97,12 @@ want to run a specific process, you can specify it directly:
 foreman start -f Procfile.dev web
 ```
 
-{% if cookiecutter.use_rq == 'y' -%}
 or
 
 ```
 foreman start -f Procfile.dev rqworker
 ```
-{%- endif %}
+
 
 ### Procfile
 
@@ -133,6 +126,7 @@ You are **highly encouraged** to do this before finishing features to make sure 
 | ALLOWED_HOSTS | comma separated list of allowed domains |
 | DATABASE_URL | database config URI |
 | SSLIFY_DISABLE | disables SSL check when `True` |
+| DATABASE_URL | URI formatted database configuration |
 
 
 ## Deploying on Heroku
@@ -146,28 +140,26 @@ to the Python buildpack.
 
 ```
 heroku buildpacks:set https://github.com/heroku/heroku-buildpack-python
-heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-nodejs
+heroku buildpacks:add --index 1 https://github.com/istrategylabs/heroku-buildpack-node-cleanup
+heroku buildpacks:add --index 2 https://github.com/heroku/heroku-buildpack-nodejs
 ```
 
 For more information, see Heroku's [multiple buildpack guide](
 https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app).
 
-{% if cookiecutter.use_postgres == 'y' -%}
+
 ### Database
 
 ```
 heroku addons:create heroku-postgresql:hobby-basic
 ```
-{%- endif %}
 
 
-{% if cookiecutter.use_redis == 'y' -%}
 ### Redis
 
 ```
 heroku addons:create heroku-redis:hobby-dev --maxmemory volatile-lru
 ```
-{%- endif %}
 
 
 ### Scheduler
@@ -204,6 +196,4 @@ to upload the custom cert and finish configuration.
 
 ## Operational Notes
 
-{% if cookiecutter.use_rq == 'y' -%}
 The setting `RQ_SHOW_ADMIN_LINK = True` tells django-rq to override the base django admin template. If your project wants to override the base admin template, you should disable this feature and add a link to django-rq yourself. [Documentation](https://github.com/ui/django-rq#queue-statistics)
-{%- endif %}
