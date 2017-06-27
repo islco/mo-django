@@ -1,6 +1,5 @@
 @charset 'utf-8';
 @import 'settings';
-{% if cookiecutter.use_foundation_sites == 'y' -%}
 @import 'foundation';
 @include foundation-global-styles;
 @include foundation-flex-grid;
@@ -39,6 +38,5 @@
 @include foundation-visibility-classes;
 @include foundation-float-classes;
 @include foundation-flex-classes;
-{%- endif %}
 
 // Add BEM component imports/includes here

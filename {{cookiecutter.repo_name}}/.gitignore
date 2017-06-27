@@ -23,5 +23,6 @@ node_modules/
 .env
 npm-debug.log
 newrelic.ini
+.idea
 
 {{ cookiecutter.package_name }}/static/

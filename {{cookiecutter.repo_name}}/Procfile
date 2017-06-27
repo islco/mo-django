@@ -1,4 +1,2 @@
 web: waitress-serve --port=$PORT {{ cookiecutter.package_name }}.wsgi:application
-{% if cookiecutter.use_rq == "y" -%}
 rqworker: python manage.py rqworkers high default low
-{%- endif %}

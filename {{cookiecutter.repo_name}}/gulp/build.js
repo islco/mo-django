@@ -48,9 +48,9 @@ gulp.task('sass', () =>
   gulp.src('./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss')
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(sass({% if cookiecutter.use_foundation_sites == 'y' -%}{
+    .pipe(sass({
       includePaths: ['node_modules/foundation-sites/scss'],
-    }{%- endif %}))
+    }))
     .pipe(postcss([autoprefixer({
       // see https://github.com/ai/browserslist#queries
       // and https://github.com/google/web-starter-kit/blob/128b2efdab595e0a4c8a563fcf1d1724ef98b8aa/gulpfile.babel.js#L73
