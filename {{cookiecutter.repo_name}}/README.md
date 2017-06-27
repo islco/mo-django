@@ -38,6 +38,7 @@ of loading these values into the environment when you execute a command.
 
 Next, create a Python 3 virtual environment and install the requirements:
 
+If using Python 2 use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/). You should make sure you set your environment as Python 3 if you are using Python 2. 
 ```
 mkvirtualenv --python=$(which python3) {{ cookiecutter.repo_name }}
 pip install -r requirements.txt
