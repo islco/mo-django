@@ -113,7 +113,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 STATICFILES_STORAGE = '{{ cookiecutter.package_name }}.' \
     'storage.DebugErroringGzipManifestStaticFilesStorage'
 
-WHITENOISE_ROOT = os.path.join(PROJECT_ROOT, 'public')
+WHITENOISE_ROOT = os.path.join(BASE_DIR, 'public')
 
 # Media
 
