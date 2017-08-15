@@ -4,9 +4,5 @@
     "package_name": "{{ cookiecutter.repo_name|lower|replace('-', '') }}",
     "author": "ISL",
     "description": "",
-    "domain_name": "example.isl.codes",
-    "use_postgres": "y",
-    "use_sentry": "y",
-    "use_rq": "n",
-    "use_redis": "{{ cookiecutter.use_rq }}"
+    "domain_name": "example.isl.codes"
 }
