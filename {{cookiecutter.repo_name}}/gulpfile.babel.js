@@ -26,8 +26,8 @@ gulp.task('watch', ['build'], () => {
     }
   })
 
-  gulp.watch('src/static/js/**/*.js', ['webpack'])
-  gulp.watch('src/static/css/**/*.css', ['css'])
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/js/**/*.js', ['webpack'])
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/css/**/*.css', ['css'])
   gulp.watch(EXTRAS_GLOB, ['extras'])
 })
 
