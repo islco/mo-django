@@ -5,16 +5,15 @@ import './gulp/production'
 import './gulp/utils'
 import EXTRAS_GLOB from './gulp/build'
 
-
 gulp.task('build', (done) => {
-  runSequence('clean', ['browserify', 'sass', 'extras'], done)
+  runSequence('clean', ['webpack', 'css', 'extras'], done)
 })
 
 gulp.task('build:production', (done) => {
   runSequence('build', ['minify:css', 'minify:js'], done)
 })
 
-gulp.task('watch', ['build', 'watchify'], () => {
+gulp.task('watch', ['build'], () => {
   const browserSync = require('browser-sync').create()
   browserSync.init({
     ghostMode: false,
@@ -27,8 +26,8 @@ gulp.task('watch', ['build', 'watchify'], () => {
     }
   })
 
-  // watchify task handles js files
-  gulp.watch('./{{ cookiecutter.package_name }}/static_src/scss/**/*.scss', ['sass'])
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/js/**/*.js', ['webpack'])
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/css/**/*.css', ['css'])
   gulp.watch(EXTRAS_GLOB, ['extras'])
 })
 
