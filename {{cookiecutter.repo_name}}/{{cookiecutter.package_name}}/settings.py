@@ -32,7 +32,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='',
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'django_rq_wrapper',
     '{{ cookiecutter.package_name }}',
     '{{ cookiecutter.package_name }}.users',
-)
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,7 +51,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -59,7 +58,7 @@ MIDDLEWARE = [
 AUTH_USER_MODEL = 'users.User'
 
 if DEBUG and config('DEBUG_TOOLBAR', default=True, cast=bool):
-    INSTALLED_APPS += ('debug_toolbar',)
+    INSTALLED_APPS.extend(['debug_toolbar', ])
     MIDDLEWARE.append(
         'debug_toolbar.middleware.DebugToolbarMiddleware')
 
@@ -128,8 +127,7 @@ if not (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME)
     MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
 
 else:
-
-    INSTALLED_APPS += ('storages',)
+    INSTALLED_APPS.extend(['storages', ])
 
     if config('AWS_S3_CUSTOM_DOMAIN', default=None):
         AWS_S3_URL_PROTOCOL = 'https:'
@@ -187,7 +185,9 @@ RQ_SHOW_ADMIN_LINK = True
 SENTRY_DSN = config('SENTRY_DSN', default=None)
 
 if SENTRY_DSN:
-    INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
+    INSTALLED_APPS.extend([
+        'raven.contrib.django.raven_compat',
+    ])
     RAVEN_CONFIG = {
         'dsn': SENTRY_DSN,
     }
