@@ -8,7 +8,7 @@ from {{ cookiecutter.package_name }}.views import HomePageView
 
 urlpatterns = [
     # Examples:
-    path('', HomeView.as_view(), name='home'),
+    path('', HomePageView.as_view(), name='home'),
     # path('blog/', include('blog.urls')),
 
     path('admin/rq/', include('django_rq.urls')),
