@@ -1,4 +1,0 @@
-dependencies:
-  override:
-    - pip install pipenv
-    - pipenv install --python 3.6
