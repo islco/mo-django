@@ -3,7 +3,7 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 
 [packages]
-Django = "<2.00,>=1.11"
+Django = "<2.1"
 boto = "<2.47,>=2.46"
 dj-database-url = "==0.4.2"
 django-debug-toolbar = "<1.8,>=1.7"
