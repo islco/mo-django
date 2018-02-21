@@ -150,7 +150,47 @@ SESSION_COOKIE_SECURE = SECURE_SSL_REDIRECT
 CSRF_COOKIE_SECURE = SECURE_SSL_REDIRECT
 
 
-# redis
+# logging
+# levels: https://docs.python.org/3/library/logging.html#logging-levels
+
+DJANGO_LOG_LEVEL = config('DJANGO_LOG_LEVEL', default='ERROR').upper()
+DJANGO_LOG_FORMAT = config('DJANGO_LOG_FORMAT', default='simple').lower()
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)s "%(message)s"',
+            'datefmt': '%d/%b/%Y %H:%M:%S',
+        },
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s %(name)s.%(funcName)s:%(lineno)d "%(message)s"',  # noqa
+            'datefmt': '%d/%b/%Y %H:%M:%S',
+        }
+    },
+    'datefmt': '%d/%b/%Y %H:%M:%S',
+    'handlers': {
+        'console': {
+            'level': DJANGO_LOG_LEVEL,
+            'class': 'logging.StreamHandler',
+            'formatter': DJANGO_LOG_FORMAT,
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        '{{ cookiecutter.package_name }}': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
+
+# Redis
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 CACHES = {
@@ -162,6 +202,7 @@ CACHES = {
         }
     },
 }
+
 
 # rq
 
