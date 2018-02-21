@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages]
+Django = "<2.1"
+boto = "<2.47,>=2.46"
+dj-database-url = "==0.4.2"
+django-debug-toolbar = "<1.8,>=1.7"
+django-redis = "<4.8,>=4.7"
+django-rq = "<0.10,>=0.9"
+django-rq-wrapper = "<2.2,>=2.1"
+django-storages = "<1.6,>=1.5"
+psycopg2 = "<2.8,>=2.7"
+python-decouple = "==3.0"
+pytz = "==2016.10"
+raven = "<7.00,>=6.00"
+redis = "<2.11,>=2.10"
+rq = "<0.8,>=0.7"
+sqlparse = "<0.3,>=0.2"
+waitress = "<1.1,>=1.0"
+whitenoise = "<3.4,>=3.3"

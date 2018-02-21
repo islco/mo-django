@@ -19,7 +19,7 @@ of note.
 
 ### Requirements
 
-* [Python 3](https://www.python.org) (with [pip](https://pip.pypa.io/en/stable/) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/))
+* [Python 3](https://www.python.org) (with [pipenv](http://pipenv.readthedocs.io/en/latest/))
 * [foreman](http://ddollar.github.io/foreman/)
 * [PostgreSQL](https://www.postgresql.org)
 * [Redis](https://redis.io)
@@ -39,8 +39,8 @@ of loading these values into the environment when you execute a command.
 Next, create a Python 3 virtual environment and install the requirements:
 
 ```
-mkvirtualenv --python=$(which python3) {{ cookiecutter.repo_name }}
-pip install -r requirements.txt
+pipenv install --dev --python 3.6
+pipenv shell
 ```
 
 Create the database specified in *.env*, run the initial model migration,
@@ -74,7 +74,7 @@ npm run build
 First load the virtualenv:
 
 ```
-workon {{ cookiecutter.repo_name }}
+pipenv shell
 ```
 
 Then use [foreman](http://ddollar.github.io/foreman/) to run the development processes:
