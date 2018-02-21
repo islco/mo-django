@@ -67,3 +67,10 @@ Answer the questions as you are prompted. Once the project has been generated, n
 The project contains a README with instructions on how to get your Django project up and running.
 
 Go write beautiful code.
+
+
+## Developing mo-django
+
+Install requirements:
+
+	pipenv install --dev --python 3.6
