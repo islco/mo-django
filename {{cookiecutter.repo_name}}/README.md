@@ -124,8 +124,7 @@ You are **highly encouraged** to do this before finishing features to make sure 
 | SECRET_KEY | Set this to a different value in every environment |
 | ALLOWED_HOSTS | comma separated list of allowed domains |
 | DATABASE_URL | database config URI |
-| SSLIFY_DISABLE | disables SSL check when `True` |
-| DATABASE_URL | URI formatted database configuration |
+| SECURE_SSL_REDIRECT | disables SSL check when `True` |
 
 
 ## Deploying on Heroku
