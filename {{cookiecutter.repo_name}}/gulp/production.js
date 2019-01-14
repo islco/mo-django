@@ -34,10 +34,6 @@ gulp.task('minify:css', () =>
 gulp.task('minify:js', () =>
   gulp.src('./{{ cookiecutter.package_name }}/static/**/*.js')
     .pipe(uglify({
-      preserveComments: 'license',
-      compressor: {
-        screw_ie8: true,
-      },
       output: {
         preamble: BANNER,
       },

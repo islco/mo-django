@@ -2,8 +2,8 @@ import gulp from 'gulp'
 import del from 'del'
 import sourcemaps from 'gulp-sourcemaps'
 import sass from 'gulp-sass'
-import concat from 'gulp-concat'
-
+import webpack from 'webpack'
+import webpackStream from 'webpack-stream'
 
 export const EXTRAS_GLOB = './{{ cookiecutter.package_name }}/static_src/**/*.{txt,json,xml,ico,jpeg,jpg,png,gif,svg,ttf,otf,eot,woff,woff2,mp3,mp4,ogv,ogg,webm}'
 
@@ -17,13 +17,10 @@ gulp.task('sass', () =>
   .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/css/'))
 )
 
-gulp.task('js', function() {
-  return gulp.src('./{{ cookiecutter.package_name }}/static_src/js/**/*.js')
-    .pipe(sourcemaps.init())
-      .pipe(concat('bundle.js'))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/js'));
-});
+gulp.task('webpack', () =>
+  webpackStream(require('../webpack.config.js'), webpack)
+    .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/js/'))
+)
 
 gulp.task('extras', () =>
   gulp.src(EXTRAS_GLOB)
