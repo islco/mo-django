@@ -6,7 +6,7 @@ import './gulp/utils'
 import EXTRAS_GLOB from './gulp/build'
 
 gulp.task('build', (done) => {
-  runSequence('clean', ['sass', 'js', 'extras'], done)
+  runSequence('clean', ['sass', 'webpack', 'extras'], done)
 })
 
 gulp.task('build:production', (done) => {
