@@ -6,11 +6,11 @@ import './gulp/utils'
 import EXTRAS_GLOB from './gulp/build'
 
 gulp.task('build', (done) => {
-  runSequence('clean', ['webpack', 'css', 'extras'], done)
+  runSequence('clean', ['sass', 'webpack', 'extras'], done)
 })
 
 gulp.task('build:production', (done) => {
-  runSequence('build', ['minify:css', 'minify:js'], done)
+  runSequence('build', 'rev', 'rev:replace', ['minify:css', 'minify:js'], done)
 })
 
 gulp.task('watch', ['build'], () => {
@@ -26,8 +26,8 @@ gulp.task('watch', ['build'], () => {
     }
   })
 
-  gulp.watch('./{{ cookiecutter.package_name }}/static_src/js/**/*.js', ['webpack'])
-  gulp.watch('./{{ cookiecutter.package_name }}/static_src/css/**/*.css', ['css'])
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/js/**/*.js', ['js'])
+  gulp.watch('./{{ cookiecutter.package_name }}/static_src/sass/**/*.scss', ['sass'])
   gulp.watch(EXTRAS_GLOB, ['extras'])
 })
 

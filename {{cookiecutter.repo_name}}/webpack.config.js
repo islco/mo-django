@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const config = {
   devtool: 'source-map',
   entry: './{{ cookiecutter.package_name }}/static_src/js/app',
+  mode: process.env.NODE_ENV || 'development',
   output: {
     path: path.resolve(__dirname, 'public/static/js'),
     filename: 'bundle.js'
@@ -13,20 +14,16 @@ const config = {
       {
         test: /\.js$/,
         exclude: [/node_modules/],
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2017']
-          }
-        }]
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/env']
+        }
       }
     ]
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true
-    })
-  ]
+  optimization: {
+    minimize: process.env.NODE_ENV === 'production'
+  }
 }
 
 module.exports = config
