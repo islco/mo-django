@@ -39,7 +39,7 @@ of loading these values into the environment when you execute a command.
 Next, create a Python 3 virtual environment and install the requirements:
 
 ```
-pipenv install --dev --python 3.6
+pipenv install --dev --python 3.7
 pipenv shell
 ```
 
@@ -124,8 +124,7 @@ You are **highly encouraged** to do this before finishing features to make sure 
 | SECRET_KEY | Set this to a different value in every environment |
 | ALLOWED_HOSTS | comma separated list of allowed domains |
 | DATABASE_URL | database config URI |
-| SSLIFY_DISABLE | disables SSL check when `True` |
-| DATABASE_URL | URI formatted database configuration |
+| SECURE_SSL_REDIRECT | disables SSL check when `True` |
 
 
 ## Deploying on Heroku

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -110,7 +111,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 
 STATICFILES_STORAGE = '{{ cookiecutter.package_name }}.' \
-    'storage.DebugErroringGzipManifestStaticFilesStorage'
+    'storage.DebugErroringCompressedManifestStaticFilesStorage'
 
 WHITENOISE_ROOT = os.path.join(BASE_DIR, 'public')
 
