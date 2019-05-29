@@ -33,6 +33,8 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='',
 # Application definition
 
 INSTALLED_APPS = [
+    '{{ cookiecutter.package_name }}',
+    '{{ cookiecutter.package_name }}.users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,8 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_rq',
     'django_rq_wrapper',
-    '{{ cookiecutter.package_name }}',
-    '{{ cookiecutter.package_name }}.users',
 ]
 
 MIDDLEWARE = [
