@@ -3,5 +3,5 @@
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
     "package_name": "{{ cookiecutter.repo_name|lower|replace('-', '') }}",
     "author": "ISL",
-    "description": "",
+    "description": ""
 }
