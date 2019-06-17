@@ -1,2 +1,2 @@
-web: waitress-serve --port=$PORT {{ cookiecutter.package_name }}.wsgi:application
-rqworker: python manage.py rqworkers high default low
+web: gunicorn {{ cookiecutter.package_name }}.wsgi:application
+rqworker: python manage.py rqworker default

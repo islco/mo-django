@@ -1,3 +1,2 @@
 web: PYTHONUNBUFFERED=True python manage.py runserver 0.0.0.0:$PORT
-static: npm run dev
-rqworker: PYTHONUNBUFFERED=True python manage.py rqworkers high default low --autoreload
+rqworker: PYTHONUNBUFFERED=True python manage.py rqworker default

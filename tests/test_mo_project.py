@@ -10,7 +10,6 @@ def context():
         'package_name': 'mo_django_test',
         'author_name': 'ISL Tester',
         'description': 'A short description of the project is good.',
-        'domain_name': 'mo-django-test.isl.co',
     }
 
 

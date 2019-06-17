@@ -4,5 +4,4 @@
     "package_name": "{{ cookiecutter.repo_name|lower|replace('-', '') }}",
     "author": "ISL",
     "description": "",
-    "domain_name": "example.isl.codes"
 }

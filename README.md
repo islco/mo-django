@@ -16,13 +16,6 @@ A [cookiecutter](https://github.com/audreyr/cookiecutter) template for ISL Djang
 
 ### Front-end
 
-* [ES2015](http://www.ecma-international.org/ecma-262/6.0/index.html) support via [Babel](https://babeljs.io)
-* [Gulp](http://gulpjs.com/)
-* [SASS](https://github.com/dlmanning/gulp-sass) (w/[Autoprefixer](https://autoprefixer.github.io/))
-* [Browserify](http://browserify.org/)
-* [BrowserSync](http://www.browsersync.io/)
-* [UglifyJS](https://github.com/mishoo/UglifyJS2/)
-* [CleanCSS](https://github.com/jakubpawlowicz/clean-css/tree/3.4)
 
 ### Python Packages
 
@@ -74,3 +67,11 @@ Go write beautiful code.
 Install requirements:
 
 	pipenv install --dev --python 3.6
+
+
+## Configuring Sentry
+
+```
+SENTRY_SDK_DSN
+SENTRY_ENVIRONMENT (optional)
+```
