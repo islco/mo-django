@@ -6,8 +6,6 @@ import uglify from 'gulp-uglify'
 import revReplace from 'gulp-rev-replace'
 import header from 'gulp-header'
 
-const BANNER = fs.readFileSync('banner.txt', 'utf8').replace('@date', (new Date()))
-
 const MANIFEST_PATH = './{{ cookiecutter.package_name }}/static/rev-manifest.json'
 
 gulp.task('rev', () =>
@@ -28,14 +26,9 @@ gulp.task('rev:replace', () =>
 gulp.task('minify:css', () =>
   gulp.src('./{{ cookiecutter.package_name }}/static/**/*.css')
     .pipe(cleancss())
-    .pipe(header(BANNER))
     .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/')))
 
 gulp.task('minify:js', () =>
   gulp.src('./{{ cookiecutter.package_name }}/static/**/*.js')
-    .pipe(uglify({
-      output: {
-        preamble: BANNER,
-      },
-    }))
+    .pipe(uglify())
     .pipe(gulp.dest('./{{ cookiecutter.package_name }}/static/')))

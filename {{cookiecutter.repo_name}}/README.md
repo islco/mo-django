@@ -39,7 +39,7 @@ of loading these values into the environment when you execute a command.
 Next, create a Python 3 virtual environment and install the requirements:
 
 ```
-pipenv install --dev --python 3.7
+pipenv install --dev --python 3.8
 pipenv shell
 ```
 
