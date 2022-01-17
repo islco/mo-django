@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_rq',
-    'django_rq_wrapper',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +92,8 @@ WSGI_APPLICATION = '{{ cookiecutter.package_name }}.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600),
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -220,16 +221,3 @@ RQ_QUEUES = {
 }
 
 RQ_SHOW_ADMIN_LINK = True
-
-
-# Sentry
-
-SENTRY_DSN = config('SENTRY_DSN', default=None)
-
-if SENTRY_DSN:
-    INSTALLED_APPS.extend([
-        'raven.contrib.django.raven_compat',
-    ])
-    RAVEN_CONFIG = {
-        'dsn': SENTRY_DSN,
-    }
