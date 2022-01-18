@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_rq',
-    'django_rq_wrapper',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +93,8 @@ DATABASES = {
     'default': dj_database_url.config(conn_max_age=600),
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -140,7 +141,7 @@ else:
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = 'media'
 
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 # SSL
@@ -220,16 +221,3 @@ RQ_QUEUES = {
 }
 
 RQ_SHOW_ADMIN_LINK = True
-
-
-# Sentry
-
-SENTRY_DSN = config('SENTRY_DSN', default=None)
-
-if SENTRY_DSN:
-    INSTALLED_APPS.extend([
-        'raven.contrib.django.raven_compat',
-    ])
-    RAVEN_CONFIG = {
-        'dsn': SENTRY_DSN,
-    }
